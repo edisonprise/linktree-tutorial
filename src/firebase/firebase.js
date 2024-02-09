@@ -80,3 +80,13 @@ export async function getUserInfo(uid) {
     return document.data();
   } catch (error) {}
 }
+
+export async function insertNewLink(link) {
+  try {
+    const docRef = collection(db, "links");
+    const res = await addDoc(docRef, link);
+    return res;
+  } catch (error) {
+    console.error(error);
+  }
+}
