@@ -90,3 +90,21 @@ export async function insertNewLink(link) {
     console.error(error);
   }
 }
+
+export async function getLinks(uid) {
+  const links = [];
+  try {
+    const collectionRef = collection(db, "links");
+    const q = query(collectionRef, where("uid", "==", uid));
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((doc) => {
+      const link = { ...doc.data() };
+      link.docId = doc.id;
+      links.push(link);
+    });
+    return links;
+  } catch (error) {
+    console.log(error);
+  }
+}
