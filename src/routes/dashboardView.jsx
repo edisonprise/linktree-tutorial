@@ -1,9 +1,10 @@
 import AuthProvider from "../components/authProvider";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import DashboardWrapper from "../components/dashboardWrapper";
 import { v4 as uuidv4 } from "uuid";
 import { getLinks, insertNewLink } from "../firebase/firebase";
+import Link from "../components/link";
 
 const DashboardView = () => {
   const navigate = useNavigate();
@@ -16,8 +17,8 @@ const DashboardView = () => {
   async function handleUserLoggedIn(user) {
     setCurrentUser(user);
     setState(2);
-    const resLinks = await getLinks(user.uid)
-    setLinks([...resLinks])
+    const resLinks = await getLinks(user.uid);
+    setLinks([...resLinks]);
   }
   function handleUserNotRegistered(user) {
     navigate("/login");
@@ -69,6 +70,10 @@ const DashboardView = () => {
       setUrl(value);
     }
   }
+
+  function handleDeleteLink() {}
+  function handleUpdateLink() {}
+
   return (
     <DashboardWrapper>
       <div>
@@ -84,9 +89,13 @@ const DashboardView = () => {
         </form>
         <div>
           {links.map((link) => (
-            <div key={link.id}>
-              <a href={link.url}>{link.title}</a>
-            </div>
+            <Link
+              key={link.docId}
+              url={link.url}
+              title={link.title}
+              onDelete={handleDeleteLink}
+              onUpdate={handleUpdateLink}
+            />
           ))}
         </div>
       </div>
