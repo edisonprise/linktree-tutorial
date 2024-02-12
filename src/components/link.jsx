@@ -48,6 +48,10 @@ const Link = ({ docId, title, url, onDelete, onUpdate }) => {
     onUpdate(docId, currentTitle, currentUrl);
   }
 
+  function handleDelete() {
+    onDelete(docId)
+  }
+
   return (
     <div key={docId}>
       <div>
@@ -87,7 +91,7 @@ const Link = ({ docId, title, url, onDelete, onUpdate }) => {
         </div>
       </div>
       <div>
-        <button>Delete</button>
+        <button onClick={handleDelete}>Delete</button>
       </div>
     </div>
   );
