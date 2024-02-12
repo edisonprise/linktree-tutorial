@@ -128,3 +128,5 @@ export async function deleteLink(docId) {
     console.error(error);
   }
 }
+
+export async function setUserProfilePhoto(uid, file) {}
