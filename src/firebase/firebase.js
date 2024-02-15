@@ -157,3 +157,7 @@ export async function getUserPublicProfileInfo(uid) {
     linksInfo: linksInfo,
   };
 }
+
+export async function logout() {
+  await auth.signOut();
+}

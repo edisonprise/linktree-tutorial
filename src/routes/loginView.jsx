@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthProvider from "../components/authProvider";
 
+import style from "./loginView.module.css";
+
 const LoginView = () => {
   const navigate = useNavigate();
   //const [currentUser, setCurrentUser] = useState(null);
@@ -46,16 +48,16 @@ const LoginView = () => {
     }
   }
   function handleUserLoggedIn(user) {
-    navigate('/dashboard')
+    navigate("/dashboard");
   }
   function handleUserNotRegistered(user) {
-    navigate('/choose-username')
+    navigate("/choose-username");
   }
   function handleUserNotLoggedIn() {
-    setCurrentState(4)
+    setCurrentState(4);
   }
 
-/*   if (state === 2) {
+  /*   if (state === 2) {
     return <div>Estas autenticado y registrado...</div>;
   }
   if (state === 3) {
@@ -63,8 +65,13 @@ const LoginView = () => {
   } */
   if (state === 4) {
     return (
-      <div>
-        <button onClick={handleOnClick}>Login with Google</button>
+      <div className={style.loginView}>
+        <div>
+          <h1>Link Tree</h1>
+        </div>
+        <button className={style.provider} onClick={handleOnClick}>
+          Login with Google
+        </button>
       </div>
     );
   }
@@ -77,15 +84,15 @@ const LoginView = () => {
     );
   }
 
-  return(
+  return (
     <AuthProvider
       onUserLoggedIn={handleUserLoggedIn}
       onUserNotRegistered={handleUserNotRegistered}
       onUserNotLoggedIn={handleUserNotLoggedIn}
-      >
+    >
       <div>Loading...</div>
     </AuthProvider>
-  )
+  );
 };
 
 export default LoginView;
